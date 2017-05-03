@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'pickadate/lib/picker.date.js' %}">
+    <link rel="stylesheet" href="{% static 'pickadate/lib/picker.time.js' %}">
+    <link rel="stylesheet" href="{% static 'pickadate/lib/picker.js' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url 'landing:index' %}" class="brand-logo" style="font-family: 'Press Start 2P', cursive">NASA Asteroids</a>
+            <form action="{% url 'landing:index' %}" id="search" method="POST">
+                {% csrf_token %}
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><input type="text" id="date_start" name="date_start" class="datepicker" placeholder="Feha de inicio"></li>
+                    <li><input type="text" id="date_end" name="date_end" class="datepicker" placeholder="Fecha fin"></li>
+                    <li><a><i id="btn-submit" class="material-icons">search</i></a></li>
+                </ul>
+            </form>
+        </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script>
+    $('.datepicker').pickadate({
+        format: 'yyyy-mm-dd',
+    });
+    $('#btn-submit').click(function(){
+        $('#search').submit();
+    });
+
+    $('#date_start').change(function(){
+        
+    });
+</script>
+
+</body>
+</html>
